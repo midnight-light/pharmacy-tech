@@ -20,7 +20,7 @@ const DEFAULT_TAB: TabEnumType = TabEnum.ORDERS;
 /**
  * @description store for tab management
  * Features:
- * - Persist tab state in localStorage
+ * - Persist tab state in sessionStorage
  * - DevTools integration for debugging
  * - History tracking (previous tab)
  */

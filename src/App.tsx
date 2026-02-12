@@ -1,4 +1,4 @@
-import { Header } from './components/widgets/header';
+import { Header } from './widgets/header';
 import { Grid, GridItem } from '@chakra-ui/react';
 import { MainLayout } from './layaouts/main-layout';
 function App() {

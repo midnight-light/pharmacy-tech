@@ -17,6 +17,9 @@ const tabsSlotRecipe = defineSlotRecipe({
       fontSize: '16px',
       fontWeight: 'medium',
     },
+    content: {
+      paddingY: '21px !important', // for all TabsContent
+    },
   },
   variants: {
     size: {
@@ -42,6 +45,9 @@ export function Provider(props: ColorModeProviderProps) {
       },
     },
     globalCss: {
+      html: {
+        colorPalette: 'gray',
+      },
       'body [data-scope="tabs"][data-part="trigger"]': {
         fontSize: '16px !important',
         color: '#B0B0B0 !important',

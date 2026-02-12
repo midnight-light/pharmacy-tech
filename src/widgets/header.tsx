@@ -11,13 +11,13 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { cn } from '@/utils/cn';
-import type { TabEnumType } from '@/features/tabs/tabs.types';
+import type { TabEnumType } from '@/features/applications/tabs/tabs.types';
 import {
   selectActiveTab,
   selectSetActiveTab,
   useTabStore,
-} from '@/features/tabs/tabs.store';
-import { TABS_CONFIG } from '@/features/tabs/tabs.constants';
+} from '@/features/applications/tabs/tabs.store';
+import { TABS_CONFIG } from '@/features/applications/tabs/tabs.constants';
 import { IoLogOutOutline } from 'react-icons/io5';
 
 interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
@@ -34,13 +34,14 @@ export function Header({ className }: HeaderProps) {
   };
   return (
     <Flex
-      pl="8.125rem" // 24 = 8rem = 130px
+      pl="8.125rem"
       pr="2.1rem"
       justifyContent="space-between"
       alignItems="center"
       h="5.375rem"
       border="1px solid"
-      borderColor="#D9E1EC"
+      borderColor="gray.200"
+      bg="gray.50"
     >
       <Box as="div" className={cn('bg.red.500', className)}>
         <Tabs.Root
