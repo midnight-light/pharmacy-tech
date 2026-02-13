@@ -8,6 +8,7 @@ import {
   selectAddApplication,
   useApplicationsStore,
 } from '../stores/applications.store';
+import { generateApplicationId } from '../utils/generate-application-id';
 
 interface UseCreateApplicationReturn {
   createApplication: (
@@ -23,7 +24,6 @@ interface UseCreateApplicationReturn {
  */
 export const useCreateApplication = (): UseCreateApplicationReturn => {
   const addApplication = useApplicationsStore(selectAddApplication);
-
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const createApplication = async (
@@ -34,7 +34,7 @@ export const useCreateApplication = (): UseCreateApplicationReturn => {
 
     try {
       const newApplication: ApplicationTableItem = {
-        id: crypto.randomUUID(),
+        id: generateApplicationId(data.category),
         pharmacy: { id: data.pharmacyId, location: data.pharmacyLocation },
         createdAt: new Date().toISOString().slice(0, 19),
         priority: data.priority,

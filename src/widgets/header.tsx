@@ -1,4 +1,3 @@
-import type { HTMLAttributes } from 'react';
 import {
   Avatar,
   Box,
@@ -7,10 +6,10 @@ import {
   Flex,
   Float,
   Icon,
+  NativeSelect,
   Tabs,
   Text,
 } from '@chakra-ui/react';
-import { cn } from '@/utils/cn';
 import type { TabEnumType } from '@/features/applications/tabs/tabs.types';
 import {
   selectActiveTab,
@@ -20,10 +19,7 @@ import {
 import { TABS_CONFIG } from '@/features/applications/tabs/tabs.constants';
 import { IoLogOutOutline } from 'react-icons/io5';
 
-interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
-  className?: string;
-}
-export function Header({ className }: HeaderProps) {
+export function Header() {
   const activeTab = useTabStore(selectActiveTab);
   const setActiveTab = useTabStore(selectSetActiveTab);
 
@@ -34,16 +30,18 @@ export function Header({ className }: HeaderProps) {
   };
   return (
     <Flex
-      pl="8.125rem"
-      pr="2.1rem"
+      pl={{ base: '1rem', md: '8.125rem' }}
+      pr={{ base: '1rem', md: '2.1rem' }}
       justifyContent="space-between"
       alignItems="center"
-      h="5.375rem"
+      h={{ base: '3.5rem', md: '5.375rem' }}
       border="1px solid"
       borderColor="gray.200"
       bg="gray.50"
     >
-      <Box as="div" className={cn('bg.red.500', className)}>
+      {/* Desktop: Tabs */}
+
+      <Box display={{ base: 'none', md: 'block' }}>
         <Tabs.Root
           value={activeTab}
           onValueChange={handleTabChange}
@@ -59,6 +57,30 @@ export function Header({ className }: HeaderProps) {
         </Tabs.Root>
       </Box>
 
+      {/* Mobile: NativeSelect */}
+      <Box display={{ base: 'block', md: 'none' }}>
+        <NativeSelect.Root size="sm">
+          <NativeSelect.Field
+            css={{
+              border: 'none',
+              outline: 'none',
+              boxShadow: 'none',
+            }}
+            fontSize="18px"
+            fontWeight="bold"
+            border="transparent"
+            value={activeTab}
+            onChange={(e) => setActiveTab(e.target.value as TabEnumType)}
+          >
+            {TABS_CONFIG.map((tab) => (
+              <option key={tab.value} value={tab.value}>
+                {tab.label}
+              </option>
+            ))}
+          </NativeSelect.Field>
+          <NativeSelect.Indicator />
+        </NativeSelect.Root>
+      </Box>
       <Box gap="5" display="flex" alignItems="center">
         <Avatar.Root>
           <Avatar.Fallback name="Иванов Иван" />
@@ -76,7 +98,11 @@ export function Header({ className }: HeaderProps) {
             </Circle>
           </Float>
         </Avatar.Root>
-        <Button variant="outline" colorScheme="gray">
+        <Button
+          variant="outline"
+          colorScheme="gray"
+          display={{ base: 'none', md: 'block' }}
+        >
           <Icon as={IoLogOutOutline} boxSize="8" />
           Выйти
         </Button>

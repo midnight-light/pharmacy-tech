@@ -1,5 +1,5 @@
 export const TabEnum = {
-  ORDERS: 'orders',
+  APPLICATIONS: 'applications',
   REPORTS: 'reports',
   REFERENCE: 'reference',
 } as const;

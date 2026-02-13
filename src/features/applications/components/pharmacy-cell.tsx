@@ -8,10 +8,15 @@ interface PharmacyCellProps {
 export const PharmacyCell: React.FC<PharmacyCellProps> = ({ pharmacy }) => {
   return (
     <Flex alignItems="center" gap="2">
-      <Badge variant="subtle" size="lg">
+      <Badge variant="subtle" size="lg" display={{ base: 'none', md: 'block' }}>
         <Text fontWeight="bold">{pharmacy.id}</Text>
       </Badge>
-      <Text>{pharmacy.location}</Text>
+      <Text
+        fontSize={{ base: 'xs', md: 'md' }}
+        color={{ base: 'gray.400', md: 'gray.700' }}
+      >
+        {pharmacy.location}
+      </Text>
     </Flex>
   );
 };

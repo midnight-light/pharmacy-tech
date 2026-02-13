@@ -35,11 +35,13 @@ import {
 } from '../../constants/applications-table-items.constants';
 import { Field } from '@/components/ui/field';
 import { LuUpload } from 'react-icons/lu';
+import { MdAdd } from 'react-icons/md';
 import { LuChevronDown } from 'react-icons/lu';
 import {
   PRIORITY_CONFIG_MAP,
   PRIORITY_LIST,
 } from '../../utils/helpers/priority-mapper';
+import { useIsMobile } from '../../../../hooks/use-is-mobile';
 
 interface CreateApplicationFormProps {
   onSuccess?: (data: CreateApplicationFormData) => void;
@@ -84,6 +86,7 @@ export const CreateApplicationForm: React.FC<CreateApplicationFormProps> = ({
   onCancel,
 }) => {
   const { createApplication, isLoading, error } = useCreateApplication();
+  const isMobile = useIsMobile();
 
   const {
     register,
@@ -134,8 +137,8 @@ export const CreateApplicationForm: React.FC<CreateApplicationFormProps> = ({
 
   return (
     <Box as="form" onSubmit={handleSubmit(onSubmit)}>
-      <Grid templateColumns="repeat(4, 1fr)" gap="6">
-        <GridItem rowStart={1} colSpan={2}>
+      <Grid templateColumns={{ base: '1fr', md: 'repeat(4, 1fr)' }} gap="6">
+        <GridItem colSpan={{ base: 1, md: 2 }}>
           <Field
             label="Аптека"
             required
@@ -177,7 +180,7 @@ export const CreateApplicationForm: React.FC<CreateApplicationFormProps> = ({
             </SelectRoot>
           </Field>
         </GridItem>
-        <GridItem rowStart={2} colSpan={2}>
+        <GridItem colSpan={{ base: 1, md: 2 }}>
           <Field
             label="Категория заявки"
             required
@@ -213,8 +216,7 @@ export const CreateApplicationForm: React.FC<CreateApplicationFormProps> = ({
             </SelectRoot>
           </Field>
         </GridItem>
-
-        <GridItem rowStart={1} colSpan={2}>
+        <GridItem colSpan={{ base: 1, md: 2 }}>
           <Field
             label="Тема"
             required
@@ -230,7 +232,7 @@ export const CreateApplicationForm: React.FC<CreateApplicationFormProps> = ({
             />
           </Field>
         </GridItem>
-        <GridItem rowStart={2} colSpan={2}>
+        <GridItem colSpan={{ base: 1, md: 2 }}>
           <Field
             label="Приоритет"
             required
@@ -292,14 +294,14 @@ export const CreateApplicationForm: React.FC<CreateApplicationFormProps> = ({
             </SelectRoot>
           </Field>
         </GridItem>
-        <GridItem rowStart={3}>
+        <GridItem colSpan={{ base: 1, md: 1 }}>
           <Checkbox.Root>
             <Checkbox.HiddenInput />
             <Checkbox.Control />
             <Checkbox.Label>Гарантийный случай</Checkbox.Label>
           </Checkbox.Root>
         </GridItem>
-        <GridItem rowStart={3} colSpan={2} colStart={3}>
+        <GridItem colSpan={{ base: 1, md: 2 }}>
           <Field
             label="Описание"
             invalid={!!errors.description}
@@ -319,15 +321,37 @@ export const CreateApplicationForm: React.FC<CreateApplicationFormProps> = ({
             />
           </Field>
         </GridItem>
-        <GridItem rowStart={4} colSpan={2} colStart={3}>
+        <GridItem
+          colSpan={{ base: 1, md: 2 }}
+          colStart={{ base: undefined, md: 3 }}
+        >
           <Field
-            label="Файлы"
+            label={isMobile ? '' : 'Файлы'}
             invalid={!!errors.files}
             errorText={errors.files?.message}
           >
             <FileUpload.Root maxW="md" maxHeight="8rem" alignItems="stretch">
               <FileUpload.HiddenInput />
-              <FileUpload.Dropzone h="8rem" minH="8rem">
+              {/* Mobile: кнопка */}
+              <FileUpload.Trigger asChild>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  display={{ base: 'flex', md: 'none' }}
+                >
+                  <Icon size="sm">
+                    <MdAdd />
+                  </Icon>
+                  Прикрепить файлы
+                </Button>
+              </FileUpload.Trigger>
+
+              {/* Desktop: dropzone */}
+              <FileUpload.Dropzone
+                display={{ base: 'none', md: 'flex' }}
+                h="8rem"
+                minH="8rem"
+              >
                 <FileUpload.DropzoneContent>
                   <Box>Выберите или перетащите фото или файл</Box>
                 </FileUpload.DropzoneContent>
@@ -339,7 +363,7 @@ export const CreateApplicationForm: React.FC<CreateApplicationFormProps> = ({
             </FileUpload.Root>
           </Field>
         </GridItem>
-        <GridItem rowStart={5} colSpan={4} colStart={1}>
+        <GridItem colSpan={{ base: 1, md: 4 }}>
           <Stack gap={4}>
             {error && (
               <Box color="red.500" fontSize="sm">
@@ -350,6 +374,7 @@ export const CreateApplicationForm: React.FC<CreateApplicationFormProps> = ({
             <Stack direction="row" gap={3} justify="flex-start">
               <Button
                 type="submit"
+                width={{ base: '100%', md: 'auto' }}
                 colorScheme="blue"
                 loading={isLoading}
                 disabled={!isDirty}
@@ -358,6 +383,7 @@ export const CreateApplicationForm: React.FC<CreateApplicationFormProps> = ({
               </Button>
               {onCancel && (
                 <Button
+                  display={{ base: 'none', md: 'flex' }}
                   variant="outline"
                   onClick={onCancel}
                   disabled={isLoading}

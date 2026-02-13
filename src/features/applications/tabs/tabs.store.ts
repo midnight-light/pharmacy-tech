@@ -15,7 +15,7 @@ interface TabActions {
 
 export type TabStore = TabState & TabActions;
 
-const DEFAULT_TAB: TabEnumType = TabEnum.ORDERS;
+const DEFAULT_TAB: TabEnumType = TabEnum.APPLICATIONS;
 
 /**
  * @description store for tab management

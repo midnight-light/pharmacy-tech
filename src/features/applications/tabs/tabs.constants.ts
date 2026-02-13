@@ -2,7 +2,7 @@ import { TabEnum, type TabItem } from './tabs.types';
 
 export const TABS_CONFIG: readonly TabItem[] = [
   {
-    value: TabEnum.ORDERS,
+    value: TabEnum.APPLICATIONS,
     label: 'Заявки',
   },
   {

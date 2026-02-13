@@ -12,8 +12,13 @@ import {
   useApplicationsStore,
 } from '../../stores/applications.store';
 
-export const OrdersContent = memo(({ className }: TabContentProps) => {
+import { useIsMobile } from '../../../../hooks/use-is-mobile';
+import { ApplicationCardList } from '../../table/application-card-list';
+
+export const ApplicationsContent = memo(({ className }: TabContentProps) => {
   const { onClose, onToggle, isOpen } = useApplicationModal();
+
+  const isMobile = useIsMobile();
 
   const applications = useApplicationsStore(selectApplications);
 
@@ -35,7 +40,11 @@ export const OrdersContent = memo(({ className }: TabContentProps) => {
       w="100%"
     >
       <ApplicationTableHeader onCreateApplication={onToggle} />
-      <ApplicationsTable applications={applications} />
+      {isMobile ? (
+        <ApplicationCardList applications={applications} />
+      ) : (
+        <ApplicationsTable applications={applications} />
+      )}
       <CreateApplicationModal
         open={isOpen}
         onClose={onClose}
@@ -45,4 +54,4 @@ export const OrdersContent = memo(({ className }: TabContentProps) => {
   );
 });
 
-OrdersContent.displayName = 'OrdersContent';
+ApplicationsContent.displayName = 'ApplicationsContent';

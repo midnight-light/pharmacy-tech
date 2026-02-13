@@ -6,10 +6,12 @@ import {
 } from '@/features/applications/tabs/tabs.store';
 import { TabEnum } from '@/features/applications/tabs/tabs.types';
 
-const OrdersContent = lazy(() =>
-  import('@/features/applications/tabs/widgets/order-content').then((m) => ({
-    default: m.OrdersContent,
-  })),
+const ApplicationsContent = lazy(() =>
+  import('@/features/applications/tabs/widgets/applications-content').then(
+    (m) => ({
+      default: m.ApplicationsContent,
+    }),
+  ),
 );
 
 const ReportsContent = lazy(() =>
@@ -37,9 +39,9 @@ export const ApplicationsPage = () => {
 
   return (
     <Tabs.Root value={activeTab}>
-      <Tabs.Content value={TabEnum.ORDERS}>
+      <Tabs.Content value={TabEnum.APPLICATIONS}>
         <Suspense fallback={<TabLoadingFallback />}>
-          <OrdersContent />
+          <ApplicationsContent />
         </Suspense>
       </Tabs.Content>
 

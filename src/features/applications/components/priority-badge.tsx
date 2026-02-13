@@ -17,7 +17,9 @@ export const PriorityBadge: React.FC<PriorityBadgeProps> = ({ priority }) => {
         boxSize={7}
         {...config.iconProps}
       />
-      <Text color="gray.400">{priority}</Text>
+      <Text color="gray.400" display={{ base: 'none', md: 'block' }}>
+        {priority}
+      </Text>
     </Flex>
   );
 };
