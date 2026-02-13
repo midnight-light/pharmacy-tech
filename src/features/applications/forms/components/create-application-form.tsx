@@ -301,7 +301,10 @@ export const CreateApplicationForm: React.FC<CreateApplicationFormProps> = ({
             <Checkbox.Label>Гарантийный случай</Checkbox.Label>
           </Checkbox.Root>
         </GridItem>
-        <GridItem colSpan={{ base: 1, md: 2 }}>
+        <GridItem
+          colSpan={{ base: 1, md: 2 }}
+          colStart={{ base: undefined, md: 3 }}
+        >
           <Field
             label="Описание"
             invalid={!!errors.description}
