@@ -7,6 +7,10 @@ npm run build     # Сборка
 npm run lint      # Линтинг
 ```
 
+## Демо
+
+https://pharmacy-tech-ten.vercel.app/
+
 ## Структура проекта
 
 ```
