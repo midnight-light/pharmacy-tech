@@ -9,7 +9,18 @@ import {
 import { MdPictureAsPdf, MdSearch, MdAdd } from 'react-icons/md';
 import { LuFilter } from 'react-icons/lu';
 import { APPLICATIONS_STATUS } from '../constants/applications-status';
-export function ApplicationTableHeader() {
+
+interface ApplicationTableHeaderProps {
+  onCreateApplication: () => void;
+}
+
+export function ApplicationTableHeader({
+  onCreateApplication,
+}: ApplicationTableHeaderProps) {
+  const handleCreateApplication = () => {
+    onCreateApplication();
+  };
+
   return (
     <Container
       minW="100%"
@@ -29,7 +40,7 @@ export function ApplicationTableHeader() {
           Экспорт
         </Button>
 
-        <Button>
+        <Button onClick={handleCreateApplication}>
           <MdAdd />
           Создать новую заявку
         </Button>

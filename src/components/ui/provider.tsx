@@ -8,7 +8,34 @@ import {
 } from '@chakra-ui/react';
 import { ColorModeProvider, type ColorModeProviderProps } from './color-mode';
 import { defineConfig } from '@chakra-ui/react';
-import { tabsAnatomy } from '@chakra-ui/react/anatomy';
+import {
+  dialogAnatomy,
+  selectAnatomy,
+  tabsAnatomy,
+} from '@chakra-ui/react/anatomy';
+
+const selectSlotRecipe = defineSlotRecipe({
+  slots: selectAnatomy.keys(),
+  base: {
+    content: {
+      borderRadius: '8px',
+    },
+  },
+});
+
+const dialogSlotRecipe = defineSlotRecipe({
+  slots: dialogAnatomy.keys(),
+  base: {
+    content: {
+      borderRadius: '15px',
+      _dark: {
+        bg: 'gray.800',
+        borderWidth: '1px',
+        borderColor: 'gray.700',
+      },
+    },
+  },
+});
 
 const tabsSlotRecipe = defineSlotRecipe({
   slots: tabsAnatomy.keys(),
@@ -42,6 +69,8 @@ export function Provider(props: ColorModeProviderProps) {
     theme: {
       slotRecipes: {
         tabs: tabsSlotRecipe,
+        dialog: dialogSlotRecipe,
+        select: selectSlotRecipe,
       },
     },
     globalCss: {

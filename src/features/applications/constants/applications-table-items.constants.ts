@@ -18,11 +18,14 @@ export const ApplicationStatus = {
   CLOSED: 'Закрыто',
 } as const;
 
+export type ApplicationPriorityType =
+  (typeof ApplicationPriority)[keyof typeof ApplicationPriority];
+
 export interface ApplicationTableItem {
   id: string;
   pharmacy: PharmacyItem;
   createdAt: string;
-  priority: (typeof ApplicationPriority)[keyof typeof ApplicationPriority];
+  priority: ApplicationPriorityType;
   title: string;
   category: string;
   techSupport: string | null;
