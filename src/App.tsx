@@ -1,6 +1,6 @@
 import { Header } from './widgets/header';
 import { Grid, GridItem } from '@chakra-ui/react';
-import { MainLayout } from './layaouts/main-layout';
+import { MainLayout } from './layouts/main-layout';
 function App() {
   return (
     <Grid
